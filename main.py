@@ -2,6 +2,7 @@
 import cv2
 import sys
 import numpy as np
+import pytesseract
 
 # takes in the first argument as the input file name
 if len(sys.argv) == 1:  # if only one argument was specified, the image file wasn't specified
@@ -24,6 +25,8 @@ blurred = cv2.medianBlur(binImg, 1)  # smooth out the image
 #se = cv2.getStructuringElement(cv2.MORPH_CROSS, (5, 5))
 #eroded = cv2.erode(blurred, se, iterations=1)  # erode and dilate to reduce noise
 #dilated = cv2.dilate(eroded, se, iterations=1)
+text = pytesseract.image_to_string(img)
+print(text)
 
 cv2.imshow('Original image', img)
 cv2.imshow('Binary image', binImg)
