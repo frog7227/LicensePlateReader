@@ -38,12 +38,17 @@ text = pytesseract.image_to_string(binImg, lang='eng',config='--oem 3 --psm 6 -c
                                                     'tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!')
 
 splitText = text.split()
-
+print(splitText)
 state = splitText[0]
-
-for i in US_states: 
-	if (i.upper().startswith(state)):
-		state = i
+stop = False
+for j in splitText:
+    if stop is True:
+        break
+    for i in US_states:
+        if (i.upper().startswith(j)):
+            state = i
+            print(j)
+            stop = True
 
 lpNumber = splitText[3]
 
