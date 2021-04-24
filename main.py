@@ -36,11 +36,19 @@ blurred = cv2.GaussianBlur(binImg, (3, 3), 0)  # smooth out the image
 # dilated = cv2.dilate(eroded, se, iterations=1)
 text = pytesseract.image_to_string(binImg, lang='eng',config='--oem 3 --psm 6 -c '
                                                     'tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!')
-print(text)
-print("\n\n\n")
-state = "PENNSYLVANIA"
+
+splitText = text.split()
+
+state = splitText[0]
+
+for i in US_states: 
+	if (i.upper().startswith(state)):
+		state = i
+
+lpNumber = splitText[3]
+
 print("The State is: " + state)
-lpNumber = "HVY5774"
+
 print("The license plate number is: "+ lpNumber)
 
 cv2.imshow('Original image', img)
